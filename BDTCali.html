@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<title>the Financial Math Calculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/BDTCali.js"></script>
+<!--<script type="text/javascript" src="js/testClass.js"></script>-->
+<script type="text/javascript" src="js/ClassBDTCali.js"></script>
+<script type="text/javascript" src="js/ClassRootFinding.js"></script>
+</head>
+<body>
+<div class="main">
+
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html">Quant<span>Calc</span> <small>the calculator for all quants</small></a></h1></div>
+      <div class="menu_nav">
+        <ul>
+          <li ><a href="index.html">Home</a></li>
+          <li class="active"><a href="pricing.html">Pricing</a></li>
+          <li><a href="calibration.html">Calibration</a></li>
+          <li><a href="arbi.html">Arbitraging</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2>Calibration of the Black-Derman-Toy model </h2><div class="clr"></div>
+          <p>Posted by <a href="Resume_PAI.pdf">Szu-Yu (Gary) Pai</a> 
+
+          
+          
+          
+          
+          
+          
+          
+
+
+<form name="isForm">
+<p><B> Generate the tree of interest rate</B></p>
+<table border=0>
+<tr><td><b>Input:</b></td><td>
+<tr><td>Yield of 1 year		</td><td><input name="S1" value="0.10"></td><td></td></tr>
+<tr><td>Yield of 2 year		</td><td><input name="S2" value="0.11"></td><td></td></tr>
+<tr><td>Yield of 3 year		</td><td><input name="S3" value="0.12"></td><td></td></tr>
+<tr><td>volatility of 1 year yield		</td><td><input name="k1" value="0.20"></td><td></td></tr>
+<tr><td>volatility of 2 year yield		                        </td><td><input name="k2" value="0.19"></td><td></td></tr>
+<tr><td>volatility of 3 year yield			</td><td><input name="k3" value="0.18"></td><td></td></tr>
+
+
+<tr><td><b>Output:</b></td><td>
+<tr><td>Tree of interest rate: </td></tr>
+<tr><td>                              </td><td>                              </td><td><input name="r32" value=""></td></tr>
+<tr><td>                              </td><td><input name="r21" value=""></td><td>                              </td></tr>
+<tr><td><input name="r1" value=""></td><td>                               </td><td><input name="r31" value=""></td></tr>
+<tr><td>                              </td><td><input name="r20" value=""></td><td>                              </td></tr>
+<tr><td>                              </td><td>                              </td><td><input name="r30" value=""></td></tr>
+</table>
+<p>
+<input type=button name="reset" value="Reset" onClick="Reset();return true;">
+<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+</p>
+</form>
+
+<font size=-1>The Calibration follows <a href="http://savage.wharton.upenn.edu/FNCE-934/syllabus/papers/Black_Derman_Toy_FAJ_90.pdf">Black, Derman and Toy's paper</a> .</font>
+
+          <p>Keywords: <a href="#">Binomial tree</a>, <a href="#">No arbitrage interest rate model</a>
+          <p>  <span>&nbsp;&bull;&nbsp;</span> April  13, 2013  <span>&nbsp;&bull;&nbsp;</span>  </p>
+        </div>
+        
+        <div class="article">
+          <h2><span></span> </h2><div class="clr"></div>
+          <div class="comment">
+           
+          </div>
+          <div class="comment">
+
+          </div>
+          <div class="comment">
+
+          </div>
+        </div>
+        <div class="article">
+          
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="searchform">
+
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Methods</span> Menu</h2><div class="clr"></div>
+          <ul class="sb_menu">
+            
+            <li><a href="AnalyticSolution.html">Analytic Solutions</a></li>
+            <li><a href="MonteCarlo.html">Monte Carlo methods</a></li>
+             <li><a href="NPDE.html">Numerical PDE Methods</a></li>
+            <li><a href="Tree.html">Tree Methods</a></li>
+            <li><a href="FFT.html">FFT Based Pricing Methods</a></li>
+          </ul>
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Derivatives Markets</span></h2><div class="clr"></div>
+          <ul class="ex_menu">
+            <li><a href="Stock.html" title="stock Options">Stock Options</a><br />Including Exotic Options</li>
+            <li><a href="InterestRate.html">Interest Rate Derivatives</a><br />Short Rate Model</li>
+            <li><a href="Credit.html" title="Credit Derivatives">Credit Derivatives</a><br />structural Models and Reduced Models</li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Image Gallery</span></h2>
+        <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
+      </div>
+      <div class="col c2">
+        <h2><span>Why this website?</span></h2>
+        <p>This website, QuantCalc, offers varied financial math calculators, calibration methods and arbitrage strategies. The reason why we develop QuantCalc is that we hope our ability of pricing, calibration and arbitraging can be seen by World. Please contact us if you want to see some specific method or strategy to be implemented on QuantCalc.</p>
+      </div>
+      <div class="col c3">
+        <h2><span>Contact</span></h2>
+        <p>Please contact us if you have any suggestion.</p>
+        <p><a href="mailto:support@yoursite.com">pai@quantcalc.net</a></p>
+        
+        <p> </p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div><div style="text-align:center"><a href="http://www.webcounter.com"><img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"/></a><br /></div>
+<div style="text-align:center">Copyright 2012 Szu-Yu Pai</div></body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<title>the Financial Math Calculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42853837-1', 'quantcalc.net');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<body>
+<div class="main">
+
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html">Quant<span>Calc</span> <small>the calculator for all quants</small></a></h1></div>
+      <div class="menu_nav">
+        <ul>
+                            <li class="active">
+                                <a href="index.html">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="pricing.html">
+                                    Pricing
+                                </a>
+                            </li>
+                            <li>
+                                <a href="calibration.html">
+                                    Calibration
+                                </a>
+                            </li>
+                            <li>
+                                <a href="arbi.html">
+                                    Arbitraging
+                                </a>
+                            </li>
+                            <li>
+                                <a href="risk.html">
+                                    Risk Management
+                                </a>
+                            </li>
+                            <li>
+                                <a href="about.html">
+                                    About us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="contact.html">
+                                    Contact us
+                                </a>
+                            </li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>A Model-Free Semi-Closed Form Pricing Formula</h2><div class="clr"></div>
+          <p>Posted by <a href="#">Chun-Yuan Chiu</a>
+
+          
+          
+          
+          
+          
+<script type="text/javascript" src="js/Ncdf.js"></script>   
+
+          
+          
+<script type="text/javascript">
+var message="Sorry!"; // Your no right click message here
+var closeWin="0"; // Do you want to close window after message (1 for yes 0 for no)
+
+function IE(e) 
+{
+     if (navigator.appName == 'Microsoft Internet Explorer' && (event.button == 2 || event.button == 3))
+     {
+          alert(message); if(closeWin=="1") self.close();
+          return false;
+     }
+}
+function NS(e) 
+{
+     if (document.layers || (document.getElementById && !document.all))
+     {
+          if (e.which==2 || e.which==3)
+          {
+               alert(message); if(closeWin=="1") self.close();
+               return false;
+          }
+     }
+}
+document.onmousedown=IE;document.onmouseup=NS;document.oncontextmenu=new Function("return false");
+
+
+
+	function Calculate()
+	{
+		var S = eval(document.isForm.S.value);
+		var K = eval(document.isForm.K.value);
+		var T = eval(document.isForm.T.value);
+		var N = eval(document.isForm.N.value);
+		var L = eval(document.isForm.L.value);
+		var H = eval(document.isForm.H.value);
+		var r = eval(document.isForm.r.value);
+		var s = eval(document.isForm.s.value);
+	    var OptionType = document.isForm.OptionType.selectedIndex;
+	
+	    var FadeInCall = 0;
+	    
+    	var d1 = (Math.log(S/K) + (r+s*s/2)*T)/(s*Math.sqrt(T));
+		var d2 = d1 - s*Math.sqrt(T);
+	    var BScall = S*Ncdf1D(d1) - K*Math.exp(-r*T)*Ncdf1D(d2);
+        
+        var dt = T/N;
+        var ti = dt;
+        var d1H, d2H, d1L, d2L, d1K, d2K, d1KL, d2KL;
+      
+        for( var i=1 ; i<=N-1 ; i++ ){
+            d1H = (Math.log(S/H) + (r+s*s/2)*ti)/(s*Math.sqrt(ti));
+            d2H = d1H - s*Math.sqrt(ti);
+            d1L = (Math.log(S/L) + (r+s*s/2)*ti)/(s*Math.sqrt(ti));
+            d2L = d1L - s*Math.sqrt(ti);
+            d1K = (Math.log(S/K) + (r+s*s/2)*T)/(s*Math.sqrt(T));
+            d2K = d1K - s*Math.sqrt(T);
+            
+            FadeInCall +=   S*Ncdf2D( d1L, d1K, Math.sqrt(ti/T) ) 
+                            - K*Math.exp(-r*T)*Ncdf2D( d2L, d2K, Math.sqrt(ti/T) )
+                            - S*Ncdf2D( d1H, d1K, Math.sqrt(ti/T) )
+                            + K*Math.exp(-r*T)*Ncdf2D( d2H, d2K, Math.sqrt(ti/T) );
+                          
+            ti += dt;
+        }
+        
+        if( K<H ){ 
+            d1H = (Math.log(S/H) + (r+s*s/2)*T)/(s*Math.sqrt(T));
+            d2H = d1H - s*Math.sqrt(T);
+            d1KL = (Math.log(S/Math.max(K, L)) + (r+s*s/2)*T)/(s*Math.sqrt(T));
+            d2KL = d1KL - s*Math.sqrt(T);
+            
+            FadeInCall +=   S*Ncdf1D( d1H ) - K*Math.exp(-r*T)*Ncdf1D( d2H )
+                            - S*Ncdf1D( d1KL ) + K*Math.exp(-r*T)*Ncdf1D( d2KL );
+        }
+        
+        FadeInCall = FadeInCall/N;
+        
+        if(OptionType == 0) 
+            document.isForm.option.value = FadeInCall;
+        else // fade-out call
+            document.isForm.option.value = BScall - FadeInCall;     
+	}
+ 	function Reset()
+        {
+                document.isForm.S.value="100";
+                document.isForm.K.value="120";
+                document.isForm.T.value="1";
+                document.isForm.N.value="12";
+                document.isForm.L.value="110";
+                document.isForm.H.value="130";                
+                document.isForm.r.value="0.1";
+                document.isForm.s.value="0.3";
+
+        		document.isForm.option.value = "";                
+        }
+</script>
+
+
+<form name="isForm">
+<!--
+<table border=0>
+<tr><td><b>Input:</b></td><td>
+<tr><td>Initial underlying asset price		</td><td><input name="S" value="100"></td><td></td></tr>
+<tr><td>Strike price				</td><td><input name="K" value="120"></td><td></td></tr>
+<tr><td>Time to maturity			</td><td><input name="T" value="1"></td><td>Years</td></tr>
+<tr><td>Number of partition			</td><td><input name="N" value="12"></td><td></td></tr>
+<tr><td>Lower limit of the range (L)			</td><td><input name="L" value="110"></td><td></td></tr>
+<tr><td>Upper limit of the range (H)			</td><td><input name="H" value="130"></td><td></td></tr>
+<tr><td>Risk free interest rate (annulized)	</td><td><input name="r" value="0.1"></td><td></td></tr>
+<tr><td>Volatility (annulized)			</td><td><input name="s" value="0.3"></td><td></td></tr>
+<tr><td>Option type		                    </td><td colspan="1" rowspan="1">
+                                            <select style="width:155px"  name="OptionType">
+                                                    <option value="0">Fade-In</option>
+                                                    <option value="1">Fade-Out</option>
+                                            </select>
+                                            </td><td></td></tr>
+
+
+<tr><td><b>Output:</b></td><td>
+<tr><td>Call value</td><td><input name="option" value="" onFocus="blur();"></td><td></td></tr>
+</table>
+<p>
+<input type=button name="reset" value="Reset" onClick="Reset();return true;">
+<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+</p>
+-->
+</form>
+
+<p>
+<tr><td><b>Derivation:</b></td><td>
+</p>
+<p>
+<a href="documents/CalibrateT.pdf">The Calibration of t Distributions Using the EM Algorithm</a>
+</p>
+
+
+
+<font size=-1>
+
+</font>
+
+          <p>Tagged: <a href="#">Black-Scholes Model</a>
+          <p>  <span>&nbsp;&bull;&nbsp;</span> Jul 27, 2014  <span>&nbsp;&bull;&nbsp;</span>  </p>
+        </div>
+        
+        <div class="article">
+          <h2><span></span> </h2><div class="clr"></div>
+          <div class="comment">
+           
+          </div>
+          <div class="comment">
+
+          </div>
+          <div class="comment">
+
+          </div>
+        </div>
+        <div class="article">
+          
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="searchform">
+
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Methods</span> Menu</h2><div class="clr"></div>
+          <ul class="sb_menu">
+            
+            <li><a href="AnalyticSolution.html">Analytic Solutions</a></li>
+            <li><a href="MonteCarlo.html">Monte Carlo methods</a></li>
+            <li><a href="NPDE.html">Numerical PDE Methods</a></li>
+            <li><a href="Tree.html">Tree Methods</a></li>
+            <li><a href="FFT.html">FFT Based Pricing Methods</a></li>
+
+          </ul>
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Derivatives Markets</span></h2><div class="clr"></div>
+          <ul class="ex_menu">
+            <li><a href="Stock.html" title="stock Options">Stock Options</a><br />Including Exotic Options</li>
+            <li><a href="InterestRate.html">Interest Rate Derivatives</a><br />Short Rate Model</li>
+            <li><a href="Credit.html" title="Credit Derivatives">Credit Derivatives</a><br />structural Models and Reduced Models</li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Image Gallery</span></h2>
+        <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
+      </div>
+      <div class="col c2">
+        <h2><span>Why this website?</span></h2>
+        <p>This website, QuantCalc, offers varied financial math calculators, hedging methods and arbitrage strategies. The reason why we develop QuantCalc is that we hope our ability of pricing, hedging and arbitraging can be seen by World. Please contact us if you want to see some specific method or strategy to be implemented on QuantCalc.</p>
+      </div>
+      <div class="col c3">
+        <h2><span>Contact</span></h2>
+        <p>Please contact us if you have any suggestion.</p>
+        <p><a href="mailto:support@yoursite.com">pai@quantcalc.net</a></p>
+        
+        <p> </p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div><div style="text-align:center"><a href="http://www.webcounter.com"><img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"/></a><br /></div>
+<div style="text-align:center">Copyright 2012 Szu-Yu Pai</div></body>
+</html>

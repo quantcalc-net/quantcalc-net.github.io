@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<title>the Financial Math Calculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+          
+<script type="text/javascript" src="js/FFT.js"></script>          
+<script type="text/javascript" src="js/ComplexNumber.js"></script>
+<script type="text/javascript" src="js/ComplexFunction.js"></script>          
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+         
+          
+          
+          
+<script type="text/javascript">
+var message="Sorry!"; // Your no right click message here
+var closeWin="0"; // Do you want to close window after message (1 for yes 0 for no)
+
+function IE(e) 
+{
+     if (navigator.appName == 'Microsoft Internet Explorer' && (event.button == 2 || event.button == 3))
+     {
+          alert(message); if(closeWin=="1") self.close();
+          return false;
+     }
+}
+function NS(e) 
+{
+     if (document.layers || (document.getElementById && !document.all))
+     {
+          if (e.which==2 || e.which==3)
+          {
+               alert(message); if(closeWin=="1") self.close();
+               return false;
+          }
+     }
+}
+document.onmousedown=IE;document.onmouseup=NS;document.oncontextmenu=new Function("return false");
+
+
+function Calculate()
+{
+    var S = eval(document.isForm.S.value);
+	var K = eval(document.isForm.K.value);
+	var T = eval(document.isForm.T.value);
+	
+	var r = eval(document.isForm.r.value);
+    var sigma = eval(document.isForm.sigma.value);
+	var lambda = eval(document.isForm.lambda.value);
+	var alpha = eval(document.isForm.alpha.value);
+	var beta = eval(document.isForm.beta.value);
+    
+    var n = eval(document.isForm.n.value);
+	var m = eval(document.isForm.m.value);
+	var x0 = -1*eval(document.isForm.c.value);
+    var h = -2*x0/(m-1);
+    var dt = T/n;
+
+    var R = new Array(m);
+    var X = new Array(m);
+    var Y = new Array(m);
+	var B = new Array(m);
+    var rec = new Array(n);
+
+    rec[0] = r*dt - (lambda*dt*(Math.exp(alpha + beta*beta/2) - 1) + dt*sigma*sigma/2 + dt*(r - lambda*(Math.exp(alpha + beta*beta/2) - 1) - sigma*sigma/2));
+//    rec[0] = (r-sigma*sigma/2)*dt;    //  for GBM
+    for (var j=0 ; j<n ; j++)
+        rec[j+1] = rec[0] + Math.log(1 + Math.exp(rec[j]));
+
+    var chfjd = function(u){    // chf of log(S_dt/S_0)
+        return cexp(cexp(new ComplexNumber(-beta*beta*u*u/2, alpha*u)).mult(new ComplexNumber(lambda*dt, 0)).add(new ComplexNumber(-sigma*sigma*u*u*dt/2 - lambda*dt, u*(r - lambda*(Math.exp(alpha + beta*beta/2) - 1) - sigma*sigma/2)*dt)));
+    }
+    var rec_chfjd = function(u){
+        return chfjd(u).mult(cexp(new ComplexNumber(0, -u*rec[0])));
+    }
+       	
+	for (var i = 0; i < m; i++)    X[i] = x0 + i*h;
+
+    R = getpdf(x0, h, m-1, (2*Math.PI/(m*h*h))*x0, (2*Math.PI/(m*h*h))*h, chfjd);
+    B = getpdf(x0, h, m-1, (2*Math.PI/(m*h*h))*x0, (2*Math.PI/(m*h*h))*h, rec_chfjd);
+    
+    for (var j = 0; j <= n-2; j++){                
+        for (var i = 0; i < m; i++) {
+            if( X[i]+rec[j+1] > 0 && Math.abs(Math.log(Math.exp(X[i] + rec[j+1]) - 1) - rec[j] ) <= -x0 ){
+                Y[i] = Intp(B, x0, h, Math.log(Math.exp(X[i] + rec[j+1]) - 1) - rec[j] )*Math.exp(X[i] + rec[j+1])/(Math.exp(X[i] + rec[j+1]) - 1);
+            }else{
+                Y[i] = 0;
+            }
+        }
+        B = conv( Y, R );
+        
+        for (var i = 0; i < m; i++)
+            B[i] = h*(B[i + m/2] + B[i + m/2 - 1])/2;       // magic!! 1st order to 2nd order
+        B = B.slice(0, m);  // get m elements starting from 0
+    }
+      		
+	var sum=0;
+	for (var k = Math.floor((Math.log((n+1)*K/S-1) - rec[n-1] - x0)/h) + 1 ; k < m; k++) {
+		sum = sum + h*( S/(n+1)*(1 + Math.exp(X[k] + rec[n-1])) - K)*B[k];
+	}
+
+    document.isForm.A.value = Math.exp(-r*T)*sum;   
+
+}
+	
+function Reset(){
+    document.isForm.S.value="100";
+    document.isForm.K.value="90";
+    document.isForm.T.value="1";
+    
+    document.isForm.r.value="0.0367";
+    document.isForm.sigma.value="0.126349";
+    document.isForm.lambda.value="0.174814";
+    document.isForm.alpha.value="-0.390078";
+    document.isForm.beta.value="0.338796";
+    
+    document.isForm.n.value="12";
+    document.isForm.m.value="4096";
+    document.isForm.c.value="16";
+    document.isForm.A.value ="";
+}
+
+function Intp(f, x0, h, x){
+    var i = Math.floor( (x-x0)/ h );    // index of the subinterval which covers x
+    
+//  2nd order    
+    if( i>=0 && i<=(f.length)-2 )  
+        return (f[i] + (x - (x0 + i*h))*(f[i+1] - f[i])/h);
+    else    
+        return 0;
+
+//  4th order, Newton form    
+//    if( i>=0 && i<=(f.length)-3 )
+//        if( f[i] + f[i+2] == 2*f[i+1] )  // the 3 data points fail to generate a quadratic equation
+//            return (f[i] + (x - (x0 + i*h))*(f[i+1] - f[i])/h);
+//        else
+//            return f[i] + (x - (x0 + i*h))*(f[i+1] - f[i])/h + (x - (x0 + i*h))*(x - (x0 + (i+1)*h))*(f[i+2] - 2*f[i+1] + f[i])/(2*h*h);
+//    else    
+//        return 0;
+
+
+}
+</script>
+
+<script language="JavaScript">
+$(document).ready(function() {
+   $('div.model').hide();
+   $('a.model-options').click(function() {
+      if ($('div.model').is(':hidden'))
+         $('div.model').slideDown('slow');
+      else
+         $('div.model').slideUp('slow');   
+      return false;
+   });         
+   $('div.numerical').hide();
+   $('a.numerical-options').click(function() {
+      if ($('div.numerical').is(':hidden'))
+         $('div.numerical').slideDown('slow');
+      else
+         $('div.numerical').slideUp('slow');   
+      return false;
+   });   
+});
+</script>
+
+
+</head>
+<body>
+<div class="main">
+
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html">Quant<span>Calc</span> <small>the calculator for all quants</small></a></h1></div>
+      <div class="menu_nav">
+        <ul>
+          <li ><a href="index.html">Home</a></li>
+          <li class="active"><a href="pricing.html">Pricing</a></li>
+          <li><a href="hedging.html">Hedging</a></li>
+          <li><a href="arbi.html">Arbitraging</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Discrete Asian Option</span> Price in the Jump-Diffusion Model</h2><div class="clr"></div>
+          <p>Posted by <a href="#">Chun-Yuan Chiu</a> </p>
+
+
+
+
+
+
+
+<form name="isForm">    
+
+<tr><td><b>Input:</b></td><td>
+
+
+<p><a href="#" class="model-options" background= yellow>Show parameters of the jump-diffusion model (annulized)</a>
+<div class="model">
+<table border=1  rgb(109, 2, 107) ; cellpadding="6" rules="none">
+<tr><td>Risk free interest rate 	</td><td><input name="r" value="0.0367"></td><td></td></tr>
+<tr><td>sigma			</td><td><input name="sigma" value="0.126349"></td><td></td></tr>
+<tr><td>lambda			</td><td><input name="lambda" value="0.174814"></td><td></td></tr>
+<tr><td>alpha			</td><td><input name="alpha" value="-0.390078"></td><td></td></tr>
+<tr><td>beta 			</td><td><input name="beta" value="0.338796"></td><td></td></tr>
+</table>
+</div>
+
+<p><a href="#" class="numerical-options" background= yellow>Show inputs of the FFT pricing method</a>
+<div class="numerical">
+<table border=1  rgb(109, 2, 107) ; cellpadding="6" rules="none">
+<tr><td>Number of grid points			</td><td><input name="m" value="4096"></td><td></td></tr>
+<tr><td>Window [-c, c], c =            		</td><td><input name="c" value="16"></td><td></td></tr>
+</table>
+</div>
+
+
+<p><a>The settings of the derivative</a>
+<table border=0>
+
+<tr><td>Initial underlying asset price		</td><td><input name="S" value="100"></td><td></td></tr>
+<tr><td>Strike price				</td><td><input name="K" value="90"></td><td></td></tr>
+<tr><td>Time to maturity			</td><td><input name="T" value="1"></td><td>Years</td></tr>
+<tr><td>Number of partitions           		</td><td><input name="n" value="12"></td><td></td></tr>
+
+
+<tr><td><b>Output:</b></td><td>
+<tr><td>Call value</td><td><input name="A" value="" onFocus="blur();"></td><td></td></tr>
+</table>
+<p>
+<input type=button name="reset" value="Reset" onClick="Reset();return true;">
+<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+</p>
+</form>
+
+<font size=-1>The price of an Asian call option in the jump-diffusion model, a model proposed by Merton (1976). The calculation is based on FFT pricing. The algorithm is a sequence of operations on grid functions. We take uniform grid in the interval [-c, c]. For now the number of grid points can only be a power of 2. </font>
+
+          <p>Tagged: <a href="#">FFT</a>, <a href="#">Asian Option</a>, <a href="#">Merton Model</a>, <a href="#">Jump-Diffusion Model</a>
+          <p>  <span>&nbsp;&bull;&nbsp;</span> Jun  12, 2013  <span>&nbsp;&bull;&nbsp;</span>  </p>
+        </div>
+        
+        <div class="article">
+          <h2><span></span> </h2><div class="clr"></div>
+          <div class="comment">
+           
+          </div>
+          <div class="comment">
+
+          </div>
+          <div class="comment">
+
+          </div>
+        </div>
+        <div class="article">
+          
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="searchform">
+
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Methods</span> Menu</h2><div class="clr"></div>
+          <ul class="sb_menu">
+            
+            <li><a href="AnalyticSolution.html">Analytic Solutions</a></li>
+            <li><a href="MonteCarlo.html">Monte Carlo Methods</a></li>
+            <li><a href="NPDE.html">Numerical PDE Methods</a></li>
+            <li><a href="Tree.html">Tree Methods</a></li><li><a href="FFT.html">FFT Based Pricing Methods</a></li>
+
+          </ul>
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Derivatives Markets</span></h2><div class="clr"></div>
+          <ul class="ex_menu">
+            <li><a href="Stock.html" title="stock Options">Stock Options</a><br />Including Exotic Options</li>
+            <li><a href="InterestRate.html">Interest Rate Derivatives</a><br />Short Rate Model</li>
+            <li><a href="Credit.html" title="Credit Derivatives">Credit Derivatives</a><br />structural Models and Reduced Models</li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Image Gallery</span></h2>
+        <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
+      </div>
+      <div class="col c2">
+        <h2><span>Why this website?</span></h2>
+        <p>This website, QuantCalc, offers varied financial math calculators, hedging methods and arbitrage strategies. The reason why we develop QuantCalc is that we hope our ability of pricing, hedging and arbitraging can be seen by World. Please contact us if you want to see some specific method or strategy to be implemented on QuantCalc.</p>
+      </div>
+      <div class="col c3">
+        <h2><span>Contact</span></h2>
+        <p>Please contact us if you have any suggestion.</p>
+        <p><a href="mailto:support@yoursite.com">pai@quantcalc.net</a></p>
+        
+        <p> </p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div><div style="text-align:center"><a href="http://www.webcounter.com"><img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"/></a><br /></div>
+<div style="text-align:center">Copyright 2012 Szu-Yu Pai</div></body>
+</html>

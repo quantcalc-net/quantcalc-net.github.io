@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<title>the Financial Math Calculator</title>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="main">
+
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html">Quant<span>Calc</span> <small>the calculator for all quants</small></a></h1></div>
+      <div class="menu_nav">
+        <ul>
+          <li ><a href="http://www.quantcalc.net/index.html">Home</a></li>
+          <li class="active"><a href="http://www.quantcalc.net/pricing.html">Pricing</a></li>
+          <li><a href="http://www.quantcalc.net/hedging.html">Hedging</a></li>
+          <li><a href="http://www.quantcalc.net/arbi.html">Arbitraging</a></li>
+          <li><a href="http://www.quantcalc.net/about.html">About us</a></li>
+          <li><a href="http://www.quantcalc.net/contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Variance Reduction for Monte Carlo Simulation</span></h2><div class="clr"></div>
+          <p><span></span> Antithetic Variates Technique<p>
+          <p>Posted by <a href="RESUME_Yu-Ting_Chen.pdf">Yu-Ting Chen</a> <span>&nbsp;&bull;&nbsp;</span>  Filed under <a href="#">Derivatives Pricing</a></p>
+
+          
+          
+<script type="text/javascript" src="js/caplet.js"></script><!-- 不知道裡面寫了什麼，一定要放第一個才能跑 -->
+<script type="text/javascript" src="js/MC.js"></script>
+<script type="text/javascript" src="js/MCAV_vanilla_Heston.js"></script>
+<script type="text/javascript" src="js/Nodes.js"></script> 
+
+
+
+<form name="isForm">
+
+<p><B>Call Option Calculators Under the Heston Model</B></p>
+$$ dS_t = S_t(r dt + \sqrt{V_t} dW_t^S), $$ 
+$$ dV_t = \kappa(\theta-V_t)dt+\sigma\sqrt{V_t}d W_t^V, $$
+$$ dW_t^S dW_t^V =\rho dt.$$
+
+<table border=0>
+<tr><td><b>Input:</b></td><td>
+<tr><td>Initial underlying asset price		</td><td><input name="s0" value="50"></td><td></td></tr>
+<tr><td>Initial volatility (annulized)		</td><td><input name="v0" value="0.04"></td><td></td></tr>
+<tr><td>Strike price				</td><td><input name="K" value="50"></td><td></td></tr> 
+<tr><td>Time to maturity			</td><td><input name="T" value="1"></td><td>Years</td></tr>
+<tr><td>$r:$ Risk free interest rate (annulized)	</td><td><input name="r" value="0.1"></td><td></td></tr>
+<tr><td>$\kappa:$ Rate of mean reversion of $V$ </td><td><input name="b" value="0.05"></td><td></td></tr>
+<tr><td>$\theta:$ Long term mean level of $V$ </td><td><input name="alpha" value="0.2"></td><td></td></tr>
+<tr><td>$\sigma:$ Volatility of V (annulized)			</td><td><input name="sigma" value="0.01"></td><td></td></tr>
+<tr><td>$\rho:$ Correlation of underlying asset and $V$ </td><td><input name="rho" value="-0.3"></td><td></td></tr>
+<tr><td>Number of partitions		</td><td><input name="n" value="1000"></td><td></td></tr>
+<tr><td>Number of paths		</td><td><input name="m" value="5000"></td><td></td></tr>
+</table>
+
+
+<table border=0>
+<tr><td><b>Output:</b></td><td>
+<tr><td></td><td><b>Call Option Price</b></td><td><b>Standard Error</b></td><td><b>Computational Time (sec.)</b></td><td>
+<tr><td>Crude Monte Carlo</td><td><input name="cmc" value="" onFocus="blur();"></td><td><input name="VarCMC" value="" onFocus="blur();"></td><td><input name="ComCMC" value="" onFocus="blur();"></td><td></td></tr>
+<tr><td>Monte Carlo with Antithetic Variates</td><td><input name="c" value="" onFocus="blur();"></td><td><input name="VarAV" value="" onFocus="blur();"></td><td><input name="ComAV" value="" onFocus="blur();"></td><td></td></tr>
+</table>
+
+<p>
+<input type=button name="reset" value="Reset" onClick="Reset();return true;">
+<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+</p>
+</form>
+
+<font size=-1>The calculation is based on Monte Carlo method with and without Antithetic Variates technique.</font>
+<p>
+<font size=-1>Go Back to <a href="Heston.html">Heston Pricer Collection</a> implemented by <a href="RESUME_Yu-Ting_Chen.pdf">Yu-Ting Chen</a></font>
+</p>
+
+          <p>Tagged: <a href="#">Monte Carlo</a>, <a href="#">Exotic Option</a>
+          <p>  <span>&nbsp;&bull;&nbsp;</span> June  13, 2016  <span>&nbsp;&bull;&nbsp;</span>  </p>
+        </div>
+
+
+        
+        <div class="article">
+          <h2><span></span> </h2><div class="clr"></div>
+          <div class="comment">
+           
+          </div>
+          <div class="comment">
+
+          </div>
+          <div class="comment">
+
+          </div>
+        </div>
+        <div class="article">
+          
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="searchform">
+
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Methods</span> Menu</h2><div class="clr"></div>
+          <ul class="sb_menu">
+            
+            <li><a href="http://www.quantcalc.net/AnalyticSolution.html">Analytic Solutions</a></li>
+            <li><a href="http://www.quantcalc.net/MonteCarlo.html">Monte Carlo methods</a></li>
+            <li><a href="http://www.quantcalc.net/HullWhiteZCB.html">Zero Coupon Bond</a></li>
+            <li><a href="http://www.quantcalc.net/Tree.html">Tree Methods</a></li>
+
+          </ul>
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Derivatives Markets</span></h2><div class="clr"></div>
+          <ul class="ex_menu">
+            <li><a href="http://www.quantcalc.net/Stock.html" title="stock Options">Stock Options</a><br />Including Exotic Options</li>
+            <li><a href="http://www.quantcalc.net/InterestRate.html">Interest Rate Derivatives</a><br />Short Rate Model</li>
+            <li><a href="http://www.quantcalc.net/Credit.html" title="Credit Derivatives">Credit Derivatives</a><br />structural Models and Reduced Models</li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Image Gallery</span></h2>
+        <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
+      </div>
+      <div class="col c2">
+        <h2><span>Why this website?</span></h2>
+        <p>This website, QuantCalc, offers varied financial math calculators, hedging methods and arbitrage strategies. The reason why we develop QuantCalc is that we hope our ability of pricing, hedging and arbitraging can be seen by World. Please contact us if you want to see some specific method or strategy to be implemented on QuantCalc.</p>
+      </div>
+      <div class="col c3">
+        <h2><span>Contact</span></h2>
+        <p>Please contact us if you have any suggestion.</p>
+        <p><a href="mailto:support@yoursite.com">pai@quantcalc.net</a></p>
+        
+        <p>Address: 208 Love Building, 1017 Academic Way Tallahassee, FL 32306-4510</p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div><div style="text-align:center"><a href="http://www.webcounter.com"><img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"/></a><br /></div>
+<div style="text-align:center">Copyright 2012 Szu-Yu Pai</div></body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<title>the Financial Math Calculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="main">
+
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html">Quant<span>Calc</span> <small>the calculator for all quants</small></a></h1></div>
+      <div class="menu_nav">
+        <ul>
+          <li ><a href="index.html">Home</a></li>
+          <li class="active"><a href="pricing.html">Pricing</a></li>
+          <li><a href="hedging.html">Hedging</a></li>
+          <li><a href="arbi.html">Arbitraging</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Call Option by Monte Carlo Simulation with Importance Sampling Technique under the Heston Model</span></h2><div class="clr"></div>
+          <p>Posted by <a href="#">Yu-Ting Chen</a> <span>&nbsp;&bull;&nbsp;</span>  Filed under <a href="#">Derivatives Pricing</a></p>
+
+          
+          
+<script type="text/javascript" src="js/caplet.js"></script><!-- 不知道裡面寫了什麼，一定要放第一個才能跑 -->
+<script type="text/javascript" src="js/MC.js"></script>
+<script type="text/javascript" src="js/MC_vanilla_Heston.js"></script>
+<script type="text/javascript" src="js/Nodes.js"></script> 
+
+
+
+<form name="isForm">
+
+<p><B>Call Option by Monte Carlo Simulation with Importance Sampling Technique under the Heston Model</B></p>
+<table border=0>
+<tr><td><b>Input:</b></td><td>
+<tr><td>Initial underlying asset price		</td><td><input name="s0" value="50"></td><td></td></tr>
+<tr><td>Initial volatility (annulized)		</td><td><input name="v0" value="0.04"></td><td></td></tr>
+<tr><td>The rate of mean reversion of V </td><td><input name="b" value="0.03"></td><td></td></tr>
+<tr><td>The long term mean level of V </td><td><input name="alpha" value="0.001"></td><td></td></tr>
+<tr><td>Strike price				</td><td><input name="K" value="50"></td><td></td></tr> 
+<tr><td>Time to maturity			</td><td><input name="T" value="1"></td><td>Years</td></tr>
+<tr><td>Risk free interest rate (annulized)	</td><td><input name="r" value="0.1"></td><td></td></tr>
+<tr><td>The correlation of stock price and V </td><td><input name="rho" value="0.0"></td><td></td></tr>
+<tr><td>Volatility of V (annulized)			</td><td><input name="sigma" value="0.01"></td><td></td></tr>
+<tr><td>Number of partitions		</td><td><input name="n" value="50"></td><td></td></tr>
+<tr><td>Number of paths		</td><td><input name="m" value="4000"></td><td></td></tr>
+
+<tr><td><b>Output:</b></td><td>
+<tr><td>Call value</td><td><input name="c" value="" onFocus="blur();"></td><td></td></tr>
+</table>
+<p>
+<input type=button name="reset" value="Reset" onClick="Reset();return true;">
+<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+</p>
+</form>
+
+<font size=-1>The calculation is based on Monte Carlo method with Importance Sampling Technique.</font>
+
+          <p>Tagged: <a href="#">Monte Carlo</a>, <a href="#">Exotic Option</a>
+          <p>  <span>&nbsp;&bull;&nbsp;</span> June  13, 2016  <span>&nbsp;&bull;&nbsp;</span>  </p>
+        </div>
+
+
+        
+        <div class="article">
+          <h2><span></span> </h2><div class="clr"></div>
+          <div class="comment">
+           
+          </div>
+          <div class="comment">
+
+          </div>
+          <div class="comment">
+
+          </div>
+        </div>
+        <div class="article">
+          
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="searchform">
+
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Methods</span> Menu</h2><div class="clr"></div>
+          <ul class="sb_menu">
+            
+            <li><a href="AnalyticSolution.html">Analytic Solutions</a></li>
+            <li><a href="MonteCarlo.html">Monte Carlo methods</a></li>
+            <li><a href="HullWhiteZCB.html">Zero Coupon Bond</a></li>
+            <li><a href="Tree.html">Tree Methods</a></li>
+
+          </ul>
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Derivatives Markets</span></h2><div class="clr"></div>
+          <ul class="ex_menu">
+            <li><a href="Stock.html" title="stock Options">Stock Options</a><br />Including Exotic Options</li>
+            <li><a href="InterestRate.html">Interest Rate Derivatives</a><br />Short Rate Model</li>
+            <li><a href="Credit.html" title="Credit Derivatives">Credit Derivatives</a><br />structural Models and Reduced Models</li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Image Gallery</span></h2>
+        <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
+        <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
+      </div>
+      <div class="col c2">
+        <h2><span>Why this website?</span></h2>
+        <p>This website, QuantCalc, offers varied financial math calculators, hedging methods and arbitrage strategies. The reason why we develop QuantCalc is that we hope our ability of pricing, hedging and arbitraging can be seen by World. Please contact us if you want to see some specific method or strategy to be implemented on QuantCalc.</p>
+      </div>
+      <div class="col c3">
+        <h2><span>Contact</span></h2>
+        <p>Please contact us if you have any suggestion.</p>
+        <p><a href="mailto:support@yoursite.com">pai@quantcalc.net</a></p>
+        
+        <p>Address: 208 Love Building, 1017 Academic Way Tallahassee, FL 32306-4510</p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div><div style="text-align:center"><a href="http://www.webcounter.com"><img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"/></a><br /></div>
+<div style="text-align:center">Copyright 2012 Szu-Yu Pai</div></body>
+</html>

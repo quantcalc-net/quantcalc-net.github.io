@@ -1,0 +1,715 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    
+
+    <head>
+
+        <title>
+
+            the Financial Math Calculator
+
+        </title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link href="style.css" rel="stylesheet" type="text/css" />
+
+        <script>
+
+            (function(i, s, o, g, r, a, m) {
+
+
+
+                i['GoogleAnalyticsObject'] = r;
+
+
+
+                i[r] = i[r] ||
+
+
+
+                function() {
+
+
+
+                    (i[r].q = i[r].q || []).push(arguments)
+
+
+
+                },
+
+
+
+                i[r].l = 1 * new Date();
+
+
+
+                a = s.createElement(o),
+
+
+
+                m = s.getElementsByTagName(o)[0];
+
+
+
+                a.async = 1;
+
+
+
+                a.src = g;
+
+
+
+                m.parentNode.insertBefore(a, m)
+
+
+
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+
+
+            ga('create', 'UA-42853837-1', 'quantcalc.net');
+
+
+
+            ga('send', 'pageview');
+
+        </script>
+
+    </head>
+
+    
+
+    <body>
+
+        <div class="main">
+
+            <div class="header">
+
+                <div class="header_resize">
+
+                    <div class="logo">
+
+                        <h1>
+
+                            <a href="index.html">
+
+                                Quant
+
+                                <span>
+
+                                    Calc
+
+                                </span>
+
+                                <small>
+
+                                    the calculator for all quants
+
+                                </small>
+
+                            </a>
+
+                        </h1>
+
+                    </div>
+
+                    <div class="menu_nav">
+
+                        <ul>
+
+                            <li class="active">
+
+                                <a href="index.html">
+
+                                    Home
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="pricing.html">
+
+                                    Pricing
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="calibration.html">
+
+                                    Calibration
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="arbi.html">
+
+                                    Arbitraging
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="risk.html">
+
+                                    Risk Management
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="about.html">
+
+                                    About us
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="contact.html">
+
+                                    Contact us
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="clr">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="content_resize">
+
+                    <div class="mainbar">
+
+                        <div class="article">
+
+                            <h2>
+
+                                What can QuantCalc do for you?
+
+                            </h2>
+
+                            <div class="clr">
+
+                            </div>
+
+                            QuantCalc is a website that specializes in calibration, arbitrage and
+
+                            derivative pricing solutions. It is web-based service providing valuations,
+
+                            calibrations, arbitrage detections. In QuantCalc users can input their
+
+                            parameters to calculate the derivative price. In some calculators, QuantCalc
+
+                            can even collect the market data automatically, and price or calibrate
+
+                            with market data. The calculators are categorized by purposes on the top
+
+                            of the website and by methods and markets on the right hand side. You can
+
+                            also find topics you are interested in:
+
+                            <script>
+
+                                (function() {
+
+
+
+                                    var cx = '007918375317127212411:csko7ztvopm';
+
+
+
+                                    var gcse = document.createElement('script');
+
+
+
+                                    gcse.type = 'text/javascript';
+
+
+
+                                    gcse.async = true;
+
+
+
+                                    gcse.src = (document.location.protocol == 'https:' ? 'https:': 'http:') +
+
+
+
+                                    '//www.google.com/cse/cse.js?cx=' + cx;
+
+
+
+                                    var s = document.getElementsByTagName('script')[0];
+
+
+
+                                    s.parentNode.insertBefore(gcse, s);
+
+
+
+                                })();
+
+                            </script>
+
+                            <gcse:search>
+
+                            </gcse:search>
+
+                            <h2>
+
+                                The top 5 most popular calculators:
+
+                            </h2>
+
+                            <div class="clr">
+
+                            </div>
+
+                            <p>
+
+                                <a href="EEandPFENormal.html">
+
+                                    1. Expected Exposure and Potential Future Exposure
+
+                                </a>
+
+                            </p>                            
+
+                            <p>
+
+                                <a href="ZCB_Vasicek.html">
+
+                                    2. Zero Coupon Bond under Vasicek Model
+
+                                </a>
+
+                            </p>
+
+                            <p>
+
+                                <a href="BSV.html">
+
+                                    3. Option Price and Greeks under Black-Scholes Model
+
+                                </a>
+
+                            </p>                            
+
+                            <p>
+
+                                <a href="MDefProbFromCDS.html">
+
+                                    4. Implied Default Probability from CDS
+
+                                </a>
+
+                            </p>
+
+                            <p>
+
+                                <a href="BDTBond.html">
+
+                                    5. Pricing Bond by the Black-Derman-Toy model
+
+                                </a>
+
+                            </p>
+
+
+                            <h2>
+
+                                The latest feature:
+
+                            </h2>
+
+                            <div class="clr">
+
+                            </div>
+
+
+          <p> <a href="MCIS_vanilla_Heston.html">Vanilla Option Pricing Under the Heston Model (Monte Carlo with  Importance Sampling)</a>  </p>
+          <p> <a href="MCCV_vanilla_Heston.html">Vanilla Option Pricing Under the Heston Model (Monte Carlo with  Control Variate)</a>  </p>
+          <p> <a href="MCAV_vanilla_Heston.html">Vanilla Option Pricing Under the Heston Model (Monte Carlo with Antithetic Variates)</a>  </p>
+          <p> <a href="MCISCV_vanilla_Heston.html">Vanilla Option Pricing Under the Heston Model (Importance Sampling + Control Variates)</a>  </p>
+
+
+ 
+
+                        </div>
+
+                        <div class="article">
+
+                            <h2>
+
+                                <span>
+
+                                </span>
+
+                            </h2>
+
+                            <div class="clr">
+
+                            </div>
+
+                            <div class="comment">
+
+                            </div>
+
+                            <div class="comment">
+
+                            </div>
+
+                            <div class="comment">
+
+                            </div>
+
+                        </div>
+
+                        <div class="article">
+
+                        </div>
+
+                    </div>
+
+                    <div class="sidebar">
+
+                        <div class="searchform">
+
+                        </div>
+
+                        <div class="gadget">
+
+                            <h2 class="star">
+
+                                <span>
+
+                                    Methods
+
+                                </span>
+
+                                Menu
+
+                            </h2>
+
+                            <div class="clr">
+
+                            </div>
+
+                            <ul class="sb_menu">
+
+                                <li>
+
+                                    <a href="AnalyticSolution.html">
+
+                                        Analytic Solutions
+
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="MonteCarlo.html">
+
+                                        Monte Carlo Methods
+
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="NPDE.html">
+
+                                        Numerical PDE Methods
+
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="Tree.html">
+
+                                        Tree Methods
+
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="FFT.html">
+
+                                        FFT Based Pricing Methods
+
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <div class="gadget">
+
+                            <h2 class="star">
+
+                                <span>
+
+                                    Derivatives Markets
+
+                                </span>
+
+                            </h2>
+
+                            <div class="clr">
+
+                            </div>
+
+                            <ul class="ex_menu">
+
+                                <li>
+
+                                    <a href="Stock.html" title="stock Options">
+
+                                        Stock Options
+
+                                    </a>
+
+                                    <br />
+
+                                    Including Exotic Options
+
+                                </li>
+
+                                <li>
+
+                                    <a href="InterestRate.html">
+
+                                        Interest Rate Derivatives
+
+                                    </a>
+
+                                    <br />
+
+                                    Short Rate Model
+
+                                </li>
+
+                                <li>
+
+                                    <a href="Credit.html" title="Credit Derivatives">
+
+                                        Credit Derivatives
+
+                                    </a>
+
+                                    <br />
+
+                                    structural Models and Reduced Models
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clr">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="fbg">
+
+                <div class="fbg_resize">
+
+                    <div class="col c1">
+
+                        <h2>
+
+                            <span>
+
+                                Image Gallery
+
+                            </span>
+
+                        </h2>
+
+                        <a href="pix1.html">
+
+                            <img src="images/pix1.jpg" width="58" height="58" alt="pix" />
+
+                        </a>
+
+                        <a href="pix2.html">
+
+                            <img src="images/pix2.jpg" width="58" height="58" alt="pix" />
+
+                        </a>
+
+                        <a href="pix3.html">
+
+                            <img src="images/pix3.jpg" width="58" height="58" alt="pix" />
+
+                        </a>
+
+                        <a href="pix4.html">
+
+                            <img src="images/pix4.jpg" width="58" height="58" alt="pix" />
+
+                        </a>
+
+                        <a href="pix5.html">
+
+                            <img src="images/pix5.jpg" width="58" height="58" alt="pix" />
+
+                        </a>
+
+                        <a href="pix6.html">
+
+                            <img src="images/pix6.jpg" width="58" height="58" alt="pix" />
+
+                        </a>
+
+                    </div>
+
+                    <div class="col c2">
+
+                        <h2>
+
+                            <span>
+
+                                Why this website?
+
+                            </span>
+
+                        </h2>
+
+                        <p>
+
+                            This website, QuantCalc, offers varied financial math calculators, calibration
+
+                            methods and arbitrage strategies. The reason why we develop QuantCalc is
+
+                            that we hope our ability of pricing, calibration and arbitraging can be
+
+                            seen by World. Please contact us if you want to see some specific method
+
+                            or strategy to be implemented on QuantCalc.
+
+                        </p>
+
+                    </div>
+
+                    <div class="col c3">
+
+                        <h2>
+
+                            <span>
+
+                                Contact
+
+                            </span>
+
+                        </h2>
+
+                        <p>
+
+                            Please contact us if you have any suggestion.
+
+                        </p>
+
+                        <p>
+
+                            <a href="pai@quantcalc.net">
+
+                                pai@quantcalc.net
+
+                            </a>
+
+                        </p>
+
+                        <p>
+
+                        </p>
+
+                    </div>
+
+                    <div class="clr">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div style="display:none">
+
+            <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript'
+
+            charset='gb2312'>
+
+            </script>
+
+        </div>
+
+        <div style="text-align:center">
+
+            <a href="http://www.webcounter.com">
+
+                <img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"
+
+                />
+
+            </a>
+
+            <br />
+
+        </div>
+
+        <div style="text-align:center">
+
+            Copyright 2012-2014 Szu-Yu Pai (Server 1)
+
+        </div>
+
+    </body>
+
+
+
+</html>
