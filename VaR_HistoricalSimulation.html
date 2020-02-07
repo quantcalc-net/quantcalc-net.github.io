@@ -1,169 +1,338 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<html>
-<head>
-<title>the Financial Math Calculator</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/uVaR_HistoricalSimulation.js"></script>
-<script type="text/javascript" src="js/VaR_HistoricalSimulation.js"></script>
-<script>
-
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-42853837-1', 'quantcalc.net');
-  ga('send', 'pageview');
-
-</script>
-</head>
-<body>
-<div class="main">
-
-  <div class="header">
-    <div class="header_resize">
-      <div class="logo"><h1><a href="index.html">Quant<span>Calc</span> <small>the calculator for all quants</small></a></h1></div>
-      <div class="menu_nav">
-        <ul>
-          <li ><a href="index.html">Home</a></li>
-          <li class="active"><a href="pricing.html">Pricing</a></li>
-          <li><a href="calibration.html">Calibration</a></li>
-          <li><a href="arbi.html">Arbitraging</a></li>
-          <li ><a href="risk.html">Risk Management</a></li>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="contact.html">Contact us</a></li>
-        </ul>
-      </div>
-      <div class="clr"></div>
-    </div>
-  </div>
-
-  <div class="content">
-    <div class="content_resize">
-      <div class="mainbar">
-        <div class="article">
-          <h2>Value at Risk by Historical Simulation for 95% Confidence Level</h2><div class="clr"></div>
-          <p>Posted by <a href="contact.html">Fred</a></p>
-
-<form name="isForm">
-<p><B></B></p>
-<table border=0>
-<tr><td><b>Input:</b></td><td>
-<tr><td>Market data of Day 00				</td><td><input name="d00" value="83.65"></td><td></td></tr>
-<tr><td>Market data of Day 01				</td><td><input name="d01" value="84.69"></td><td></td></tr>
-<tr><td>Market data of Day 02				</td><td><input name="d02" value="84.82"></td><td></td></tr>
-<tr><td>Market data of Day 03				</td><td><input name="d03" value="84.84"></td><td></td></tr>
-<tr><td>Market data of Day 04				</td><td><input name="d04" value="84.12"></td><td></td></tr>
-<tr><td>Market data of Day 05				</td><td><input name="d05" value="85.36"></td><td></td></tr>
-<tr><td>Market data of Day 06				</td><td><input name="d06" value="86.37"></td><td></td></tr>
-<tr><td>Market data of Day 07				</td><td><input name="d07" value="86.39"></td><td></td></tr>
-<tr><td>Market data of Day 08				</td><td><input name="d08" value="86.62"></td><td></td></tr>
-<tr><td>Market data of Day 09				</td><td><input name="d09" value="86.75"></td><td></td></tr>
-<tr><td>Market data of Day 10				</td><td><input name="d10" value="87.73"></td><td></td></tr>
-<tr><td>Market data of Day 11				</td><td><input name="d11" value="89.38"></td><td></td></tr>
-<tr><td>Market data of Day 12				</td><td><input name="d12" value="89.14"></td><td></td></tr>
-<tr><td>Market data of Day 13				</td><td><input name="d13" value="90.77"></td><td></td></tr>
-<tr><td>Market data of Day 14				</td><td><input name="d14" value="90.43"></td><td></td></tr>
-<tr><td>Market data of Day 15				</td><td><input name="d15" value="89.81"></td><td></td></tr>
-<tr><td>Market data of Day 16				</td><td><input name="d16" value="91.08"></td><td></td></tr>
-<tr><td>Market data of Day 17				</td><td><input name="d17" value="92.12"></td><td></td></tr>
-<tr><td>Market data of Day 18				</td><td><input name="d18" value="92.48"></td><td></td></tr>
-<tr><td>Market data of Day 19				</td><td><input name="d19" value="92.22"></td><td></td></tr>
-<tr><td>Market data of Day 20 (Today)				</td><td><input name="d20" value="93.70"></td><td></td></tr>
-<tr><td>Number of shares				</td><td><input name="L" value="1000000"></td><td></td></tr>
-
-
-<tr><td><b>Output:</b></td><td>
-<tr><td>1 day VaR</td><td><input name="V1" value="" onFocus="blur();"></td><td></td></tr>
-<tr><td>10 day VaR</td><td><input name="V10" value="" onFocus="blur();"></td><td></td></tr>
-</table>
-<p>
-<input type=button name="reset" value="Reset" onClick="Reset();return true;">
-<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
-</p>
-</form>
-
-<font size=-1>The Historical Data is the stock price of Apple Inc. form 5/9/2014 to 6/9/2014.</font>
-
-          <p>Tagged:  <a href="#">VaR Calculator</a>, <a href="#">Historical Simulation</a>, <a href="#">Value at Risk</a>
-          <p>  <span>&nbsp;&bull;&nbsp;</span> Jun 15, 2014  <span>&nbsp;&bull;&nbsp;</span>  </p>
-        </div>
-        
-        <div class="article">
-          <h2><span></span> </h2><div class="clr"></div>
-          <div class="comment">
-           
-          </div>
-          <div class="comment">
-
-          </div>
-          <div class="comment">
-
-          </div>
-        </div>
-        <div class="article">
-          
-        </div>
-      </div>
-      <div class="sidebar">
-        <div class="searchform">
-
-        </div>
-        <div class="gadget">
-          <h2 class="star"><span>Methods</span> Menu</h2><div class="clr"></div>
-          <ul class="sb_menu">
-            
-            <li><a href="AnalyticSolution.html">Analytic Solutions</a></li>
-            <li><a href="MonteCarlo.html">Monte Carlo methods</a></li>
-            <li><a href="NPDE.html">Numerical PDE Methods</a></li>
-            <li><a href="Tree.html">Tree Methods</a></li>
-            <li><a href="FFT.html">FFT Based Pricing Methods</a></li>
-
-          </ul>
-        </div>
-        <div class="gadget">
-          <h2 class="star"><span>Derivatives Markets</span></h2><div class="clr"></div>
-          <ul class="ex_menu">
-            <li><a href="Stock.html" title="stock Options">Stock Options</a><br />Including Exotic Options</li>
-            <li><a href="InterestRate.html">Interest Rate Derivatives</a><br />Short Rate Model</li>
-            <li><a href="Credit.html" title="Credit Derivatives">Credit Derivatives</a><br />structural Models and Reduced Models</li>
-
-          </ul>
-        </div>
-      </div>
-      <div class="clr"></div>
-    </div>
-  </div>
-
-  <div class="fbg">
-    <div class="fbg_resize">
-      <div class="col c1">
-        <h2><span>Image Gallery</span></h2>
-        <a href="pix1.html"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
-        <a href="pix2.html"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
-        <a href="pix3.html"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
-        <a href="pix4.html"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
-        <a href="pix5.html"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
-        <a href="pix6.html"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
-      </div>
-      <div class="col c2">
-        <h2><span>Why this website?</span></h2>
-        <p>This website, QuantCalc, offers varied financial math calculators, hedging methods and arbitrage strategies. The reason why we develop QuantCalc is that we hope our ability of pricing, hedging and arbitraging can be seen by World. Please contact us if you want to see some specific method or strategy to be implemented on QuantCalc.</p>
-      </div>
-      <div class="col c3">
-        <h2><span>Contact</span></h2>
-        <p>Please contact us if you have any suggestion.</p>
-        <p><a href="pai@quantcalc.net">pai@quantcalc.net</a></p>
-        
-        <p> </p>
-      </div>
-      <div class="clr"></div>
-    </div>
-  </div>
-
-</div>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div><div style="text-align:center"><a href="http://www.webcounter.com"><img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"/></a><br /></div>
-<div style="text-align:center">Copyright 2012 Szu-Yu Pai</div></body>
-</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html>
+
+<head>
+
+<title>the Financial Math Calculator</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/uVaR_HistoricalSimulation.js"></script>
+
+<script type="text/javascript" src="js/VaR_HistoricalSimulation.js"></script>
+
+<script>
+
+
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+
+
+  ga('create', 'UA-42853837-1', 'quantcalc.net');
+
+  ga('send', 'pageview');
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<div class="main">
+
+
+
+  <div class="header">
+
+    <div class="header_resize">
+
+      <div class="logo"><h1><a href="index.html">Quant<span>Calc</span> <small>the calculator for all quants</small></a></h1></div>
+
+      <div class="menu_nav">
+
+        <ul>
+
+          <li ><a href="index.html">Home</a></li>
+
+          <li class="active"><a href="pricing.html">Pricing</a></li>
+
+          <li><a href="calibration.html">Calibration</a></li>
+
+          <li><a href="arbi.html">Arbitraging</a></li>
+
+          <li ><a>Risk Management</a></li>
+
+          <li><a href="about.html">About us</a></li>
+
+          <li><a href="contact.html">Contact us</a></li>
+
+        </ul>
+
+      </div>
+
+      <div class="clr"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="content">
+
+    <div class="content_resize">
+
+      <div class="mainbar">
+
+        <div class="article">
+
+          <h2>Value at Risk by Historical Simulation for 95% Confidence Level</h2><div class="clr"></div>
+
+          <p>Posted by <a href="contact.html">Fred</a></p>
+
+
+
+<form name="isForm">
+
+<p><B></B></p>
+
+<table border=0>
+
+<tr><td><b>Input:</b></td><td>
+
+<tr><td>Market data of Day 00				</td><td><input name="d00" value="83.65"></td><td></td></tr>
+
+<tr><td>Market data of Day 01				</td><td><input name="d01" value="84.69"></td><td></td></tr>
+
+<tr><td>Market data of Day 02				</td><td><input name="d02" value="84.82"></td><td></td></tr>
+
+<tr><td>Market data of Day 03				</td><td><input name="d03" value="84.84"></td><td></td></tr>
+
+<tr><td>Market data of Day 04				</td><td><input name="d04" value="84.12"></td><td></td></tr>
+
+<tr><td>Market data of Day 05				</td><td><input name="d05" value="85.36"></td><td></td></tr>
+
+<tr><td>Market data of Day 06				</td><td><input name="d06" value="86.37"></td><td></td></tr>
+
+<tr><td>Market data of Day 07				</td><td><input name="d07" value="86.39"></td><td></td></tr>
+
+<tr><td>Market data of Day 08				</td><td><input name="d08" value="86.62"></td><td></td></tr>
+
+<tr><td>Market data of Day 09				</td><td><input name="d09" value="86.75"></td><td></td></tr>
+
+<tr><td>Market data of Day 10				</td><td><input name="d10" value="87.73"></td><td></td></tr>
+
+<tr><td>Market data of Day 11				</td><td><input name="d11" value="89.38"></td><td></td></tr>
+
+<tr><td>Market data of Day 12				</td><td><input name="d12" value="89.14"></td><td></td></tr>
+
+<tr><td>Market data of Day 13				</td><td><input name="d13" value="90.77"></td><td></td></tr>
+
+<tr><td>Market data of Day 14				</td><td><input name="d14" value="90.43"></td><td></td></tr>
+
+<tr><td>Market data of Day 15				</td><td><input name="d15" value="89.81"></td><td></td></tr>
+
+<tr><td>Market data of Day 16				</td><td><input name="d16" value="91.08"></td><td></td></tr>
+
+<tr><td>Market data of Day 17				</td><td><input name="d17" value="92.12"></td><td></td></tr>
+
+<tr><td>Market data of Day 18				</td><td><input name="d18" value="92.48"></td><td></td></tr>
+
+<tr><td>Market data of Day 19				</td><td><input name="d19" value="92.22"></td><td></td></tr>
+
+<tr><td>Market data of Day 20 (Today)				</td><td><input name="d20" value="93.70"></td><td></td></tr>
+
+<tr><td>Number of shares				</td><td><input name="L" value="1000000"></td><td></td></tr>
+
+
+
+
+
+<tr><td><b>Output:</b></td><td>
+
+<tr><td>1 day VaR</td><td><input name="V1" value="" onFocus="blur();"></td><td></td></tr>
+
+<tr><td>10 day VaR</td><td><input name="V10" value="" onFocus="blur();"></td><td></td></tr>
+
+</table>
+
+<p>
+
+<input type=button name="reset" value="Reset" onClick="Reset();return true;">
+
+<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+
+</p>
+
+</form>
+
+
+
+<font size=-1>The Historical Data is the stock price of Apple Inc. form 5/9/2014 to 6/9/2014.</font>
+
+
+
+          <p>Tagged:  <a href="#">VaR Calculator</a>, <a href="#">Historical Simulation</a>, <a href="#">Value at Risk</a>
+
+          <p>  <span>&nbsp;&bull;&nbsp;</span> Jun 15, 2014  <span>&nbsp;&bull;&nbsp;</span>  </p>
+
+        </div>
+
+        
+
+        <div class="article">
+
+          <h2><span></span> </h2><div class="clr"></div>
+
+          <div class="comment">
+
+           
+
+          </div>
+
+          <div class="comment">
+
+
+
+          </div>
+
+          <div class="comment">
+
+
+
+          </div>
+
+        </div>
+
+        <div class="article">
+
+          
+
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+
+        <div class="searchform">
+
+
+
+        </div>
+
+        <div class="gadget">
+
+          <h2 class="star"><span>Methods</span> Menu</h2><div class="clr"></div>
+
+          <ul class="sb_menu">
+
+            
+
+            <li><a href="AnalyticSolution.html">Analytic Solutions</a></li>
+
+            <li><a href="MonteCarlo.html">Monte Carlo methods</a></li>
+
+            <li><a href="NPDE.html">Numerical PDE Methods</a></li>
+
+            <li><a href="Tree.html">Tree Methods</a></li>
+
+            <li><a href="FFT.html">FFT Based Pricing Methods</a></li>
+
+
+
+          </ul>
+
+        </div>
+
+        <div class="gadget">
+
+          <h2 class="star"><span>Derivatives Markets</span></h2><div class="clr"></div>
+
+          <ul class="ex_menu">
+
+            <li><a href="Stock.html" title="stock Options">Stock Options</a><br />Including Exotic Options</li>
+
+            <li><a href="InterestRate.html">Interest Rate Derivatives</a><br />Short Rate Model</li>
+
+            <li><a href="Credit.html" title="Credit Derivatives">Credit Derivatives</a><br />structural Models and Reduced Models</li>
+
+
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <div class="clr"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="fbg">
+
+    <div class="fbg_resize">
+
+      <div class="col c1">
+
+        <h2><span>Image Gallery</span></h2>
+
+        <a href="pix1.html"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
+
+        <a href="pix2.html"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
+
+        <a href="pix3.html"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
+
+        <a href="pix4.html"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
+
+        <a href="pix5.html"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
+
+        <a href="pix6.html"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
+
+      </div>
+
+      <div class="col c2">
+
+        <h2><span>Why this website?</span></h2>
+
+        <p>This website, QuantCalc, offers varied financial math calculators, hedging methods and arbitrage strategies. The reason why we develop QuantCalc is that we hope our ability of pricing, hedging and arbitraging can be seen by World. Please contact us if you want to see some specific method or strategy to be implemented on QuantCalc.</p>
+
+      </div>
+
+      <div class="col c3">
+
+        <h2><span>Contact</span></h2>
+
+        <p>Please contact us if you have any suggestion.</p>
+
+        <p><a href="pai@quantcalc.net">pai@quantcalc.net</a></p>
+
+        
+
+        <p> </p>
+
+      </div>
+
+      <div class="clr"></div>
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div><div style="text-align:center"><a href="http://www.webcounter.com"><img border="0" src="http://www.webcounter.com/50cff59419407/counter.png"/></a><br /></div>
+
+<div style="text-align:center">Copyright 2012 Szu-Yu Pai</div></body>
+
+</html>
+
